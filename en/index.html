@@ -1,0 +1,261 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Breathing and relaxation: what the science says</title>
+<style>
+:root{--bg:#f6f3ee;--fg:#1f2a2e;--mut:#5a676b;--card:#fff;--line:#d9d4ca;--ac:#2f6f73;--acb:#e3f0ef;--mod:#2f7d4f;--lim:#a8741a;--deb:#a24b3b;--warn:#fff4dc}
+@media (prefers-color-scheme:dark){:root{--bg:#14191b;--fg:#e8eceb;--mut:#a3b0b2;--card:#1d2528;--line:#2e3a3d;--ac:#7cc4c6;--acb:#1f3335;--mod:#6fd096;--lim:#e0b35a;--deb:#e8917f;--warn:#33301f}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 Verdana,system-ui,sans-serif}
+header{padding:20px 16px 8px;max-width:760px;margin:auto}h1{font-size:1.45rem;margin:.2em 0}
+.sub{color:var(--mut);margin:0}main{max-width:760px;margin:auto;padding:8px 16px 60px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}nav button,.btn{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font:inherit;cursor:pointer}
+nav button[aria-pressed=true],.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.card h2{font-size:1.1rem;margin:.1em 0 .3em}.tag{display:inline-block;font-size:.8rem;border-radius:20px;padding:2px 10px;border:1px solid currentColor;margin-bottom:6px}
+.mod{color:var(--mod)}.lim{color:var(--lim)}.deb{color:var(--deb)}
+details{margin-top:8px}summary{cursor:pointer;color:var(--ac);padding:4px 0}
+.warn{background:var(--warn);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:.95rem}
+.pacer{display:flex;flex-direction:column;align-items:center;gap:10px;margin:14px 0}
+.orb{width:120px;height:120px;border-radius:50%;background:var(--acb);border:3px solid var(--ac);transition:transform linear}
+.lbl{font-size:1.2rem;min-height:1.6em}.tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+ol,ul{padding-left:1.2em}.ref{font-size:.85rem;color:var(--mut);margin:6px 0}
+a{color:var(--ac)}
+.legend span{margin-right:10px}input[type=search]{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit}
+.ov{position:fixed;inset:0;background:var(--bg);z-index:10;overflow:auto;padding:16px}.ovin{max-width:560px;margin:auto}.big{font-size:1.35rem;text-align:center;padding:0 8px}.orb{width:160px;height:160px;margin:50px 0}.btn[aria-pressed=true]{background:var(--ac);color:#fff}input[type=range]{width:70%;vertical-align:middle}label{margin-right:10px;white-space:nowrap}
+</style></head><body>
+<header><h1>Breathing and relaxation</h1><p class="sub">Techniques with scientific evidence, explained honestly. Companion to the Yoga Nidra course.</p></header>
+<main>
+<div class="warn"><b>Important.</b> This app is for information only and does not replace medical advice. If you have respiratory or heart conditions, epilepsy, are pregnant, or are being treated for anxiety or depression, choose techniques with your doctor. If you feel unwell, stop and breathe normally.</div>
+<div class="card legend"><b>How to read the evidence levels</b><br>
+<span class="mod">● Moderate</span> several reviews or meta-analyses agree, despite limitations.<br>
+<span class="lim">● Limited</span> few studies or small ones.<br>
+<span class="deb">● Weak</span> mostly hypotheses or uncertain results.<br>
+<small>The level is my own summary of what the sources state, not an official classification. I included only what I read: where I could not read the source, I say so.</small></div>
+<nav id="tabs"></nav><input type="search" id="q" placeholder="Search a technique…" aria-label="Search">
+<div id="list"></div>
+<div id="extra"></div>
+</main>
+<script>
+const TECH=[
+{id:"lenta",g:"resp",n:"Slow breathing (about 6 breaths per minute)",ev:"mod",evt:"Moderate evidence",
+ sum:"Breathe slowly: about 5 seconds in and 5 seconds out, for 5-10 minutes.",
+ how:["Sit or lie down comfortably.","Breathe in through the nose counting to 5, without strain.","Breathe out gently counting to 5.","Continue for 5-10 minutes: you can use the guide below."],
+ pace:{name:"6 breaths per minute",steps:[["Breathe in",5],["Breathe out",5]]},
+ sci:"A systematic review and meta-analysis of 223 studies (Laborde 2022) found that voluntary slow breathing increases vagally mediated heart rate variability indices. A review of 15 studies in healthy people (Zaccaro 2018) links it to greater calm, but it included no randomized trials, so the evidence for anxiety and mood is weaker. A meta-analysis of randomized trials of breathwork in general (Fincham 2023) found small-to-moderate effects on stress, anxiety and depression (g between -0.32 and -0.40).",
+ lim:"Studies use different techniques and subjective measures; many lack adequate control groups. No single 'perfect' rate has been shown to suit everyone.",
+ safe:"Generally safe. If you feel dizzy or tingly, return to normal breathing and resume more gently.",
+ refs:["laborde","zaccaro","fincham","brainsci"]},
+{id:"sigh",g:"resp",n:"Cyclic sighing",ev:"lim",evt:"Limited evidence",
+ sum:"Two inhalations through the nose (the second short, to top up the lungs) and one long exhalation through the mouth.",
+ how:["Breathe in through the nose.","Add a second small inhalation on top of the first.","Breathe out slowly through the mouth, as long as you comfortably can.","Repeat for 5 minutes."],
+ pace:{name:"Cyclic sighing",steps:[["Breathe in",2.5],["Breathe in again",1],["Breathe out slowly",6]]},
+ sci:"In a randomized study of 108 adults (Balban 2023), 5 minutes a day for 28 days raised positive mood more than mindfulness, and cyclic sighing lowered breathing rate more. But anxiety fell similarly in all groups, including mindfulness.",
+ lim:"A single study, small groups, run remotely, registered retrospectively, with a conflict of interest declared by the authors. It should be considered promising, not proven.",
+ safe:"Generally safe. Do not force the exhalation.",refs:["balban"]},
+{id:"box",g:"resp",n:"Box breathing",ev:"deb",evt:"Weak evidence",
+ sum:"Breathe in, hold, breathe out, hold, each for the same time (for example 4 seconds).",
+ how:["Breathe in counting to 4.","Hold gently for 4.","Breathe out counting to 4.","Stay with empty lungs for 4. If the pauses make you uneasy, shorten or skip them."],
+ pace:{name:"Box breathing 4-4-4-4",steps:[["Breathe in",4],["Hold",4],["Breathe out",4],["Pause",4]]},
+ sci:"In the only randomized study that compared it (Balban 2023, 21 people in the group) it improved mood, but not significantly differently from mindfulness.",
+ lim:"Almost no specific studies. It is widely used in military and sports settings, but I found no solid evidence that it is better than other slow breathing.",
+ safe:"The pauses can be uncomfortable if you have anxiety or breathing or heart problems: shorten or remove them.",refs:["balban"]},
+{id:"pursed",g:"resp",n:"Pursed-lip and diaphragmatic breathing",ev:"mod",evt:"Moderate-to-low evidence (in respiratory conditions)",
+ sum:"Breathe in through the nose letting the belly rise; breathe out slowly with lips as if blowing at a candle.",
+ how:["Place a hand on your belly.","Breathe in through the nose for 2 seconds: the belly rises.","Breathe out for 4 seconds with pursed lips.","Repeat calmly for a few minutes."],
+ pace:{name:"Pursed lips 2-4",steps:[["Breathe in through the nose",2],["Breathe out, pursed lips",4]]},
+ sci:"The Cochrane review on COPD (Holland 2012, 16 studies, 1,233 people) found that breathing exercises improve walking capacity (about +50 m with pursed-lip, +35 m with diaphragmatic), but inconsistently for breathlessness and quality of life, with low-quality evidence. The Cochrane review on asthma (2020, 22 studies, 2,880 adults) found possible improvements in quality of life at 3 months.",
+ lim:"Results mainly concern people with respiratory disease, not relaxation in general. Evidence is of low to moderate quality.",
+ safe:"If you have asthma, COPD or other lung conditions, check with your doctor or physiotherapist.",refs:["holland","cochraneasma"]},
+{id:"hrvb",g:"resp",n:"Heart rate variability (HRV) biofeedback",ev:"mod",evt:"Moderate evidence",
+ sum:"You breathe slowly while watching a live chart of your heartbeat: a sensor is needed. This app does not include one.",
+ how:["You need a sensor (chest strap or dedicated app).","You look for the breathing rate that maximizes heart rate variability, usually near 6 breaths per minute.","Sessions of 10-20 minutes over several weeks."],
+ sci:"A meta-analysis of 24 studies with 484 people (Goessl 2017) found that it reduces stress and anxiety with a large effect (g about 0.8).",
+ lim:"The authors call for better-controlled studies; measures are subjective questionnaires.",
+ safe:"Generally safe.",refs:["goessl"]},
+{id:"nadi",g:"resp",n:"Alternate nostril breathing (nadi shodhana)",ev:"lim",evt:"Limited evidence (blood pressure)",
+ sum:"You close one nostril at a time with your fingers, alternating inhalation and exhalation.",
+ how:["Sit with a comfortable back.","Close the right nostril with the thumb, breathe in gently through the left.","Close the left with the ring finger, breathe out through the right.","Breathe in through the right and switch again. Continue for 5 minutes, without holding the breath."],
+ pace:{name:"Alternate nostrils (rhythm)",steps:[["Breathe in",4],["Breathe out",6]]},
+ sci:"A meta-analysis of 6 randomized trials (525 people; Nam 2024) found a reduction in systolic pressure of about 7 mmHg and diastolic of about 5 mmHg.",
+ lim:"Very high heterogeneity (I² above 85%), no double blinding, and no formal risk-of-bias assessment in the abstract I read. Evidence for anxiety and stress is less solid.",
+ safe:"General precaution: avoid breath holds and talk to your doctor if you have heart or blood pressure problems, or are pregnant.",refs:["nam"]},
+{id:"pmr",g:"ril",n:"Progressive muscle relaxation (Jacobson)",ev:"mod",evt:"Moderate evidence",
+ sum:"You tense and then relax one muscle group at a time, to feel the difference.",
+ how:["Lie or sit comfortably.","Tense a muscle group (for example the hands) for about 5 seconds, without pain.","Release suddenly and notice the relaxation for 15-20 seconds.","Move on: arms, shoulders, face, belly, legs, feet."],
+ steps:["Hands and forearms","Arms","Forehead","Eyes and cheeks","Jaw","Neck and shoulders","Chest and back","Belly","Thighs and buttocks","Calves and feet"],
+ sci:"A systematic review of 46 publications (over 3,400 adults; Khir 2024) concludes that it reduces stress, anxiety and depression; it is more effective when combined with other interventions.",
+ lim:"The page I read does not report an overall quality score. Tension and release timings are practical conventions, not study results.",
+ safe:"Do not tense sore or injured muscles; if it hurts, skip that group.",refs:["khir","manzoni"]},
+{id:"at",g:"ril",n:"Autogenic training",ev:"lim",evt:"Limited-to-moderate evidence",
+ sum:"You silently repeat phrases of heaviness and warmth (\"my right arm is heavy\") to induce relaxation.",
+ how:["Lie or sit comfortably, eyes closed.","Repeat quietly: \"My right arm is heavy\", then the left, then the legs.","Then \"My right arm is warm\" and so on.","Add: calm breathing, regular heartbeat, warm belly, cool forehead."],
+ sci:"A meta-analysis of 11 studies (Seo and Kim 2019, in Korean) found reduced anxiety in healthy people in the short term (SMD -1.37, but only 85 participants) and reduced depression in patients in the long term (SMD -0.29).",
+ lim:"Small numbers for anxiety; I did not read the full article in its original language. For patients with chronic physical illness, one systematic review of randomized trials was only a protocol, with no results.",
+ safe:"Best learned with an instructor. If you have a psychiatric condition or are on medication, talk to your doctor first.",refs:["seo","ramirez"]},
+{id:"bodyscan",g:"ril",n:"Body scan",ev:"deb",evt:"Weak evidence",
+ sum:"You bring attention to each part of the body, from feet to head, without changing anything.",
+ how:["Lie down comfortably.","Bring attention to the feet, then ankles, legs, and so on up to the face.","If the mind wanders, gently bring it back.","It lasts 10 to 30 minutes."],
+ sci:"A meta-analysis of 14 randomized studies (Applied Psychology: Health and Well-Being 2022) found a small effect on mindfulness (g = 0.27), with low quality and high heterogeneity. It concludes that on its own it does not seem enough to improve health outcomes.",
+ lim:"It works well within broader programs such as MBSR; on its own the evidence is weak.",
+ safe:"For people who have experienced trauma, focusing on the body can be hard: you can stop, or do it with a professional.",refs:["bodyscan"]},
+{id:"mbsr",g:"ril",n:"Mindfulness-based stress reduction (MBSR)",ev:"mod",evt:"Moderate evidence",
+ sum:"An 8-week program of meditation, body scan and mindful movement, led by an instructor.",
+ how:["Usually 8 weekly sessions with an instructor.","Daily home practice of about 45 minutes.","This app does not replace it: you can look for a course near you."],
+ sci:"A meta-analysis of 29 studies with 2,668 healthy adults (Khoury 2015) found moderate effects on stress, anxiety, depression and quality of life (g about 0.53-0.55), maintained at follow-up.",
+ lim:"High heterogeneity; studies are in English and not always with an active control.",
+ safe:"Not recommended as the only treatment in an acute psychiatric crisis.",refs:["khoury"]},
+{id:"imag",g:"ril",n:"Guided imagery",ev:"lim",evt:"Limited evidence",
+ sum:"You imagine a peaceful place in detail (colors, sounds, smells) while a voice or audio guides you.",
+ how:["Close your eyes, breathe slowly.","Imagine a safe place: a beach, a forest, a room.","Add the senses: what do you see, hear, smell?","Stay there a few minutes, then return gently."],
+ sci:"A systematic review of 9 studies (Anamagh 2024) on anxiety before surgery generally reports a reduction, but 3 studies were at high risk of bias, two found no differences, and the authors' judgment is more positive than the data show.",
+ lim:"Evidence only in the perioperative setting; protocols vary widely; no meta-analysis.",
+ safe:"If disturbing images appear, open your eyes and stop.",refs:["anamagh"]},
+{id:"yn",g:"ril",n:"Yoga nidra",ev:"lim",evt:"Limited-to-moderate evidence",
+ sum:"Guided relaxation lying down, with a rotation of awareness through the body, breath and imagery (the subject of the course).",
+ how:["Lie down comfortably and covered.","Follow the guided audio of the course.","Nothing special to do: just listen."],
+ sci:"The syntheses I read for the course: Ghai 2025 (Ann N Y Acad Sci, doi 10.1111/nyas.70149), Musto and Vallerand 2023 (doi 10.1111/jnu.12927). A small study (Sharpe 2023) in people with insomnia found differences only in breathing rate.",
+ lim:"Studies are often small and with controls that are not always adequate.",
+ safe:"If strong emotions appear, open your eyes and stop.",refs:["ghai","musto","sharpe"]}
+];
+const NOPROVE=[
+{n:"4-7-8 breathing",t:"Very popular, but I found no controlled studies specific to it. It probably works like other slow breathing: the long exhalation is the most plausible role, but this is not shown. Long holds can cause discomfort."},
+{n:"Wim Hof method (hyperventilation, breath holds, cold)",t:"A 2024 review in PLOS ONE (9 studies, 8 of them trials) reports possibly interesting effects on inflammation, but very low quality and high risk of bias. I could not read it in the original text (only a news report summarizing it): so I give no authors or DOI. The most important risk: hyperventilation followed by a breath hold can cause loss of consciousness; it must never be practiced in water, while driving, or standing."},
+{n:"Intense 'energizing' breathwork with hyperventilation",t:"In the Balban 2023 study the cyclic hyperventilation-with-retention group had benefits similar to the others, but the study is small. It can cause dizziness, tingling and fainting: not for people with asthma, epilepsy or heart problems."},
+{n:"Sudarshan Kriya Yoga",t:"Studies and a review exist, but in this session I could not read the sources: for correctness I do not evaluate it here. I will add it once I have read them."}
+];
+const REFS={
+laborde:"Laborde S, Allen MS, Borges U, et al. Effects of voluntary slow breathing on heart rate and heart rate variability: a systematic review and a meta-analysis. Neurosci Biobehav Rev 2022;138:104711. doi:10.1016/j.neubiorev.2022.104711",
+zaccaro:"Zaccaro A, Piarulli A, Laurino M, et al. How breath-control can change your life: a systematic review on psycho-physiological correlates of slow breathing. Front Hum Neurosci 2018;12:353. doi:10.3389/fnhum.2018.00353",
+fincham:"Fincham GW, Strauss C, Montero-Marin J, Cavanagh K. Effect of breathwork on stress and mental health: a meta-analysis of randomised-controlled trials. Sci Rep 2023;13:432.",
+brainsci:"Breathing practices for stress and anxiety reduction: conceptual framework of implementation guidelines based on a systematic review of the published literature. Brain Sci 2023;13(12):1612. doi:10.3390/brainsci13121612",
+balban:"Balban MY, Neri E, Kogon MM, et al. Brief structured respiration practices enhance mood and reduce physiological arousal. Cell Rep Med 2023;4(1):100895. doi:10.1016/j.xcrm.2022.100895",
+holland:"Holland AE, Hill CJ, Jones AY, McDonald CF. Breathing exercises for chronic obstructive pulmonary disease. Cochrane Database Syst Rev 2012;(10):CD008250.",
+cochraneasma:"Breathing exercises for adults with asthma. Cochrane Database Syst Rev 2020 (CD001277).",
+goessl:"Goessl VC, Curtiss JE, Hofmann SG. The effect of heart rate variability biofeedback training on stress and anxiety: a meta-analysis. Psychol Med 2017;47(15):2578-2586.",
+nam:"Nam TG, Jeong H, Kim KH, Jang I. Effectiveness of alternative nostril breathing on blood pressure: a systematic review and meta-analysis of randomized controlled trials. Complement Med Res 2024;31(5):449-460. doi:10.1159/000539707",
+khir:"Khir SM, et al. Efficacy of progressive muscle relaxation in adults for stress, anxiety, and depression: a systematic review. Psychol Res Behav Manag 2024. doi:10.2147/PRBM.S437277 (authors incompletely indicated on the page I read: to be verified).",
+manzoni:"Manzoni GM, Pagnini F, Castelnuovo G, Molinari E. Relaxation training for anxiety: a ten-years systematic review with meta-analysis. BMC Psychiatry 2008;8:41. doi:10.1186/1471-244X-8-41",
+seo:"Seo E, Kim S. Effect of autogenic training for stress response: a systematic review and meta-analysis. J Korean Acad Nurs 2019;49(4):361-374. doi:10.4040/jkan.2019.49.4.361",
+ramirez:"Ramirez-Garcia MP, Leclerc-Loiselle J, Genest C, et al. Systematic review protocol on autogenic training (no results). Syst Rev 2020;9:74. doi:10.1186/s13643-020-01336-3",
+bodyscan:"The effects of body scan meditation: a systematic review and meta-analysis. Appl Psychol Health Well Being 2022;14(3):1062-1080. doi:10.1111/aphw.12366 (authors not read).",
+khoury:"Khoury B, Sharma M, Rush SE, Fournier C. Mindfulness-based stress reduction for healthy individuals: a meta-analysis. J Psychosom Res 2015;78(6):519-528. doi:10.1016/j.jpsychores.2015.03.009",
+anamagh:"Arjmandy Anamagh M, et al. The effect of guided imagery on perioperative anxiety in hospitalized adult patients: a systematic review of randomized controlled trials. Surg Pract Sci 2024;18:100255. doi:10.1016/j.sipas.2024.100255",
+ghai:"Ghai et al. 2025, Ann N Y Acad Sci. doi:10.1111/nyas.70149",
+musto:"Musto S, Vallerand A. 2023. doi:10.1111/jnu.12927",
+sharpe:"Sharpe E, et al. 2023, J Psychosom Res 166:111169."
+};
+
+TECH.push(
+{id:"pran",g:"pran",n:"Pranayama (yogic breathing): overview",ev:"lim",evt:"Limited evidence",
+ sum:"A set of yogic breathing techniques: some slow (nadi shodhana, ujjayi, bhramari), others fast or with breath holds (kapalabhati, bhastrika, kumbhaka).",
+ how:["Always start from the slow, gentle techniques in the Practice section.","Fast techniques or breath holds should be learned with an instructor.","Never force: the breath must stay comfortable."],
+ sci:"A systematic review and meta-analysis of 6 randomized trials (517 patients with non-psychotic mental disorders; Mütze 2025) found, versus passive controls, a small reduction in symptoms (SMD -0.27 intention-to-treat, -0.35 per-protocol); results similar to standard therapy; no significant effect on depression. In 6 of 7 publications the protocol was Sudarshan Kriya. In the Cochrane review on COPD, yoga with pranayama improved the walking test by about 45 m (2 studies, 74 people).",
+ lim:"High risk of bias in 4 of 6 studies, small samples, 94% male participants; results are not separated by individual technique. The authors consider the conclusions preliminary and say pranayama should not be used instead of standard therapies. Adverse events were insufficiently reported.",
+ safe:"Fast techniques gave more adverse events (anxiety, breathlessness, cough, dizziness, headache), especially kapalabhati. They do not replace treatment.",refs:["mutze","holland"]},
+{id:"ujj",g:"pran",n:"Ujjayi ('ocean breath')",ev:"deb",evt:"Weak evidence (not studied alone)",
+ sum:"Slow nasal breathing with a slight constriction in the throat that makes a soft sound, like the sea.",
+ how:["Breathe in through the nose.","Narrow the throat slightly, as when fogging a mirror, but with the mouth closed.","Breathe out through the nose with the same soft sound.","Do not force: the sound is barely audible."],
+ pace:{name:"Ujjayi",steps:[["Breathe in",4],["Breathe out",6]]},
+ sci:"It appears in the protocols of some pranayama studies (for example Haller 2023, included by Mütze 2025), but it is not analyzed separately in the sources I read.",
+ lim:"I found no specific results for this technique in the sources read: effects are those, uncertain, of slow breathing.",
+ safe:"If you feel throat tension or lightheadedness, return to normal breathing.",refs:["mutze"]},
+{id:"bhram",g:"pran",n:"Bhramari (bee breath)",ev:"deb",evt:"Evidence not verified",
+ sum:"You breathe in through the nose and breathe out making a soft humming sound like a bee, with the mouth closed.",
+ how:["Sit comfortably, mouth closed.","Breathe in through the nose.","Breathe out making a continuous, soft 'mmm'.","Feel the vibration in the face and head."],
+ pace:{name:"Bhramari",steps:[["Breathe in",4],["Breathe out humming",8]]},
+ sci:"In this session I did not read specific reviews on this technique: I cannot tell you how well it is supported.",
+ lim:"Consider it slow breathing with a long exhalation; its own effects are not verified by me.",
+ safe:"Generally gentle. If you have ear or sinus problems, do not push the sound.",refs:[]},
+{id:"fast",g:"pran",n:"Fast breathing and breath holds (kapalabhati, bhastrika, kumbhaka)",ev:"deb",evt:"Weak evidence, more adverse events",
+ sum:"Fast, forceful breaths (kapalabhati, bhastrika) or breath holds (kumbhaka). Not offered here as guided practice.",
+ how:["They are not included in this app's sessions.","If you want to try them, do so with an experienced instructor."],
+ sci:"In the Mütze 2025 review, fast techniques were associated with more adverse events than slow ones; in one study 15 participants reported problems such as anxiety, breathlessness, cough, dizziness and headache, mostly attributed to kapalabhati, with dropouts.",
+ lim:"Results are not separated by technique; evidence of effectiveness is insufficient.",
+ safe:"Not suitable for people with asthma, epilepsy, heart problems or high blood pressure, pregnancy, or those prone to anxiety attacks.",refs:["mutze"]},
+{id:"bscript",g:"ril",n:"Guided body relaxation (5-minute practice)",ev:"deb",evt:"See body scan card",
+ script:"bodyscan",sum:"A voice-guided path from feet to head. Evidence is that of the body scan.",
+ how:["Press Practice and follow the prompts."],sci:"See the Body scan card.",lim:"See the Body scan card.",safe:"If strong emotions appear, open your eyes and stop.",refs:["bodyscan"]},
+{id:"iscript",g:"ril",n:"Guided imagery: safe place (4-minute practice)",ev:"lim",evt:"See guided imagery card",
+ script:"imagery",sum:"A voice-guided journey to an imagined peaceful place.",
+ how:["Press Practice and follow the prompts."],sci:"See the Guided imagery card.",lim:"See the Guided imagery card.",safe:"If disturbing images appear, open your eyes and stop.",refs:["anamagh"]}
+);
+NOPROVE[3]={n:"Sudarshan Kriya Yoga",t:"It is the protocol used in 6 of 7 publications in the Mütze 2025 pranayama review (small effect on symptoms, high risk of bias). I did not read the individual studies or other dedicated reviews, so I do not offer it as a guided practice."};
+REFS.mutze="Mütze C, Mitzinger D, Haller H. Effectiveness of pranayama for mental disorders: a systematic review and meta-analysis of randomized controlled trials. Front Psychiatry 2025;16:1616996. doi:10.3389/fpsyt.2025.1616996";
+const SCRIPTS={
+bodyscan:[["Lie down comfortably. Close your eyes if you like. Let your body be supported.",15],["Take a slower breath and bring attention to your feet. Feel the contact, the temperature, whatever is there.",25],["Move up to the ankles and calves. You do not need to change anything: just notice.",25],["The knees and thighs. If you feel tension, let it be.",25],["The pelvis and belly. Feel the breath moving it gently.",25],["The back, resting. Let the weight sink down.",25],["The chest and shoulders. Let the shoulders drop.",25],["The arms, hands, fingers.",25],["The neck and throat. Soften the jaw.",25],["The face: forehead, eyes, cheeks.",25],["Now feel the whole body, breathing, supported.",30],["When you are ready, gently move your fingers, take a deeper breath and open your eyes. End of practice.",10]],
+imagery:[["Close your eyes and take a few slow breaths.",15],["Imagine a place where you feel safe: it can be real or invented.",25],["Look at the colors around you. What is the light like?",25],["Listen to the sounds: water, wind, silence.",25],["Feel the temperature on your skin and what touches your body.",25],["If there is a scent, breathe it in gently.",25],["Stay there. You have nothing to do or solve here.",35],["When you wish, return calmly: feel your body, your breath, the room. Open your eyes. End of practice.",10]]};
+const L={
+tabs:{prac:"Practice",all:"Cards",resp:"Breathing",pran:"Pranayama",ril:"Relaxation",no:"Not enough evidence",bib:"References",hist:"My diary"},
+lang:"en-GB",inh:/Breathe in/,hold:/Hold|Pause/,
+start:"Start",stop:"Stop",pause:"Pause",resume:"Resume",dur:"Duration",min:"minutes",
+before:"Before you begin: how calm do you feel, from 0 (not at all) to 10?",after:"How do you feel now, from 0 to 10?",
+voice:"Voice guide",tones:"Soft sounds",vib:"Vibration",save:"Save to diary",done:"Done. Breathe normally.",
+pracIntro:"Choose a practice and experience it. You can turn on voice guide and sounds. Stop whenever you like.",
+histEmpty:"No saved practice yet. Data stays only on this device.",histNote:"Data stays only on this device. It is a personal observation, not a scientific measure.",
+calma:"calm",avg:"Average change",clear:"Clear the diary",stopMsg:"Practice stopped.",
+tense:"tense (5 s)",release:"release (20 s)",guidedBy:"Voice: your device's speech synthesis (if available).",
+safeTitle:"Before you begin",safeText:"Be comfortable. If you feel dizzy, tingly or uneasy, stop and breathe normally.",
+today:"today"};
+const HT={how:"How to do it",sci:"What the research says",lim:"Limits:",safe:"Cautions",src:"Sources:",none:"No results.",noprove:"These techniques are very popular, but the evidence is absent or too weak. This does not mean they are useless or dangerous, but that I cannot tell you they work."};
+</script><script>
+let cur="prac";const tabs=document.getElementById('tabs'),list=document.getElementById('list'),q=document.getElementById('q');
+const G=L.tabs;
+for(const k in G){const b=document.createElement('button');b.textContent=G[k];b.setAttribute('aria-pressed',k===cur);b.onclick=()=>{cur=k;[...tabs.children].forEach(x=>x.setAttribute('aria-pressed',x===b));render()};tabs.appendChild(b)}
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const canPractice=t=>t.pace||t.steps||t.script;
+function card(t){return `<div class="card" id="${t.id}"><span class="tag ${t.ev}">${esc(t.evt)}</span><h2>${esc(t.n)}</h2><p>${esc(t.sum)}</p>
+${canPractice(t)?`<button class="btn p" onclick="openS('${t.id}')">▶ ${L.tabs.prac}</button>`:''}
+<details><summary>${HT.how}</summary><ol>${t.how.map(h=>`<li>${esc(h)}</li>`).join('')}</ol></details>
+<details><summary>${HT.sci}</summary><p>${esc(t.sci)}</p><p><b>${HT.lim}</b> ${esc(t.lim)}</p></details>
+<details><summary>${HT.safe}</summary><p>${esc(t.safe)}</p></details>
+${t.refs.length?`<p class="ref">${HT.src} ${t.refs.map(r=>`<a href="#bib" onclick="goBib()">${r}</a>`).join(', ')}</p>`:''}</div>`}
+function goBib(){cur='bib';[...tabs.children].forEach((x,i)=>x.setAttribute('aria-pressed',Object.keys(G)[i]==='bib'));render()}
+function hist(){try{return JSON.parse(localStorage.getItem('rr_hist')||'[]')}catch(e){return[]}}
+function saveH(h){try{localStorage.setItem('rr_hist',JSON.stringify(h))}catch(e){}}
+function render(){stopAll();list.innerHTML='';q.style.display=(cur==='all'||cur==='resp'||cur==='pran'||cur==='ril')?'':'none';const s=q.value.toLowerCase();
+if(cur==='prac'){list.innerHTML=`<p>${L.pracIntro}</p>`+TECH.filter(canPractice).map(t=>`<div class="card"><span class="tag ${t.ev}">${esc(t.evt)}</span><h2>${esc(t.n)}</h2><p>${esc(t.sum)}</p><button class="btn p" onclick="openS('${t.id}')">▶ ${L.start}</button></div>`).join('');return}
+if(cur==='hist'){const h=hist();if(!h.length){list.innerHTML=`<p>${L.histEmpty}</p>`;return}
+const d=h.map(x=>x.a-x.b),avg=(d.reduce((a,b)=>a+b,0)/d.length).toFixed(1);
+list.innerHTML=`<div class="card"><b>${L.avg} (${L.calma}):</b> ${avg>0?'+':''}${avg} / ${h.length}</div>`+h.slice().reverse().slice(0,30).map(x=>`<div class="card"><b>${esc(x.n)}</b><br>${esc(x.d)} · ${x.m} ${L.min.slice(0,3)}<br>${L.calma}: ${x.b} → ${x.a}</div>`).join('')+`<p class="ref">${L.histNote}</p><button class="btn" onclick="if(confirm('?')){saveH([]);render()}">${L.clear}</button>`;return}
+if(cur==='no'){list.innerHTML=`<div class="warn">${HT.noprove}</div>`+NOPROVE.map(n=>`<div class="card"><h2>${esc(n.n)}</h2><p>${esc(n.t)}</p></div>`).join('');return}
+if(cur==='bib'){list.innerHTML=`<div class="card" id="bib"><h2>${L.tabs.bib}</h2>`+Object.entries(REFS).map(([k,v])=>`<p class="ref"><b>${k}</b>: ${esc(v)}</p>`).join('')+'</div>';return}
+list.innerHTML=TECH.filter(t=>(cur==='all'||t.g===cur)&&(!s||(t.n+t.sum).toLowerCase().includes(s))).map(card).join('')||`<p>${HT.none}</p>`}
+q.oninput=render;
+// ---------- sessione ----------
+let S=null,tm=null,ac=null,paused=false,sessionTimers=[];
+function ctx(){try{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac}catch(e){return null}}
+function tone(f1,f2,d){if(!S||!S.tones)return;const c=ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';const t=c.currentTime;o.frequency.setValueAtTime(f1,t);o.frequency.linearRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06,t+Math.min(.6,d/3));g.gain.linearRampToValueAtTime(0,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+.05)}
+function say(txt){if(!S||!S.voice||!window.speechSynthesis)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang=L.lang;u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function vibe(ms){if(S&&S.vib&&navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
+function stopAll(){if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}S=null;const o=document.getElementById('ov');if(o)o.remove()}
+function ov(html){let o=document.getElementById('ov');if(!o){o=document.createElement('div');o.id='ov';o.className='ov';o.setAttribute('role','dialog');document.body.appendChild(o)}o.innerHTML='<div class="ovin">'+html+'</div>'}
+function openS(id){stopAll();const t=TECH.find(x=>x.id===id);S={t,voice:true,tones:false,vib:false,mins:5,b:5};
+const durOpt=t.pace||t.steps&&false?`<p>${L.dur}: ${[3,5,10].map(m=>`<button class="btn dm" data-m="${m}" aria-pressed="${m===5}" onclick="setM(${m},this)">${m} ${L.min}</button>`).join(' ')}</p>`:'';
+ov(`<h2>${esc(t.n)}</h2><div class="warn"><b>${L.safeTitle}</b><br>${esc(L.safeText)}<br>${esc(t.safe)}</div>
+<p>${L.before}</p><input type="range" min="0" max="10" value="5" id="bsl" oninput="S.b=+this.value;document.getElementById('bv').textContent=this.value"> <b id="bv">5</b>
+${durOpt}
+<p><label><input type="checkbox" checked onchange="S.voice=this.checked"> ${L.voice}</label> <label><input type="checkbox" onchange="S.tones=this.checked"> ${L.tones}</label> <label><input type="checkbox" onchange="S.vib=this.checked"> ${L.vib}</label></p>
+<p class="ref">${L.guidedBy}</p><div class="tools"><button class="btn p" onclick="runS()">▶ ${L.start}</button><button class="btn" onclick="stopAll()">${L.stop}</button></div>`)}
+function setM(m,b){S.mins=m;document.querySelectorAll('.dm').forEach(x=>x.setAttribute('aria-pressed',x===b))}
+function runS(){const t=S.t;ctx();try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}
+S.start=Date.now();ov(`<h2>${esc(t.n)}</h2><div class="pacer"><div class="orb" id="orb"></div><div class="lbl big" id="lb"></div><div class="ref" id="sub"></div></div><div class="tools"><button class="btn" id="pz" onclick="pz()">${L.pause}</button><button class="btn" onclick="endS(false)">${L.stop}</button></div>`);
+const orb=document.getElementById('orb'),lb=document.getElementById('lb'),sub=document.getElementById('sub');
+if(t.pace){const end=Date.now()+S.mins*60000;let i=0,cycle=0;S.mode='pace';
+(function step(){if(!S)return;if(paused){tm=setTimeout(step,300);return}
+if(Date.now()>=end){endS(true);return}
+const [n,d]=t.pace.steps[i%t.pace.steps.length];lb.textContent=n;const inh=L.inh.test(n),hold=L.hold.test(n);
+if(!hold){orb.style.transition=`transform ${d}s linear`;orb.style.transform=inh?'scale(1.7)':'scale(1)';tone(inh?220:330,inh?330:220,d);vibe(inh?40:20)}
+if(cycle<3)say(n);i++;if(i%t.pace.steps.length===0)cycle++;
+sub.textContent=Math.max(0,Math.ceil((end-Date.now())/1000))+' s';tm=setTimeout(step,d*1000)})()}
+else{let seq=[];if(t.steps){t.steps.forEach(s=>{seq.push([s+': '+L.tense,5,'t']);seq.push([s+': '+L.release,20,'r'])})}else{seq=SCRIPTS[t.script].map(x=>[x[0],x[1],'s'])}
+S.mode='seq';let i=0;
+(function step(){if(!S)return;if(paused){tm=setTimeout(step,300);return}
+if(i>=seq.length){endS(true);return}
+const [txt,d,k]=seq[i];lb.textContent=txt;sub.textContent=(i+1)+' / '+seq.length;orb.style.transition=`transform ${d}s ease-in-out`;orb.style.transform=k==='t'?'scale(1.5)':'scale(1.2)';if(k==='r')orb.style.transform='scale(1)';
+say(txt);tone(k==='t'?260:200,k==='t'?300:200,2);vibe(k==='t'?60:0);i++;tm=setTimeout(step,d*1000)})()}}
+function pz(){paused=!paused;document.getElementById('pz').textContent=paused?L.resume:L.pause;if(window.speechSynthesis)try{paused?speechSynthesis.pause():speechSynthesis.resume()}catch(e){}}
+function endS(ok){if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}paused=false;
+if(!S)return;const t=S.t;S.a=5;
+ov(`<h2>${ok?L.done:L.stopMsg}</h2><p>${L.after}</p><input type="range" min="0" max="10" value="5" oninput="S.a=+this.value;document.getElementById('av').textContent=this.value"> <b id="av">5</b>
+<div class="tools"><button class="btn p" onclick="saveS()">${L.save}</button><button class="btn" onclick="stopAll()">✕</button></div>`)}
+function saveS(){const h=hist();h.push({n:S.t.n,d:new Date().toLocaleDateString(L.lang),m:S.mode==='pace'?S.mins:Math.max(1,Math.round((Date.now()-S.start)/60000)),b:S.b,a:S.a});saveH(h);stopAll();cur='hist';[...tabs.children].forEach((x,i)=>x.setAttribute('aria-pressed',Object.keys(G)[i]==='hist'));render()}
+render();
+</script></body></html>
