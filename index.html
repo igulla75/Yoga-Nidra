@@ -191,7 +191,7 @@ voice:"Voce guida",tones:"Suoni dolci",vib:"Vibrazione",save:"Salva nel diario",
 pracIntro:"Scegli una pratica e fai l'esperienza. Puoi attivare voce guida e suoni. Fermati quando vuoi.",
 histEmpty:"Ancora nessuna pratica salvata. I dati restano solo su questo dispositivo.",histNote:"I dati restano solo su questo dispositivo. È un'osservazione personale, non una misura scientifica.",
 calma:"calma",avg:"Cambio medio",clear:"Cancella il diario",stopMsg:"Pratica interrotta.",
-tense:"contrai (5 s)",release:"rilascia (20 s)",guidedBy:"Voce: sintesi vocale del tuo dispositivo (se disponibile).",
+tense:"contrai (5 s)",release:"rilascia (20 s)",guidedBy:"Voce registrata. Se non si carica, usa la voce del dispositivo.",
 safeTitle:"Prima di iniziare",safeText:"Sii comoda. Se senti vertigini, formicolii o disagio, fermati e respira normalmente.",
 today:"oggi"};
 const HT={how:"Come si fa",sci:"Che cosa dice la ricerca",lim:"Limiti:",safe:"Attenzioni",src:"Fonti:",none:"Nessun risultato.",noprove:"Queste tecniche sono molto popolari, ma le prove sono assenti o troppo deboli. Non significa che siano inutili o pericolose, ma che non posso dirti che funzionano."};
@@ -259,6 +259,8 @@ const CUES={"pratica_pmr": [[0.4, "Trova una posizione comoda, seduta o sdraiata
 L.audioDir='audio/it/';L.tenseRe=/contrai|Contrai/;L.relRe=/rilascia|Rilascia/;
 
 L.home='← Torna all\'inizio';
+
+L.back='← Indietro';
 </script><script>
 let cur="prac";const tabs=document.getElementById('tabs'),list=document.getElementById('list'),q=document.getElementById('q');
 const G=L.tabs;
@@ -293,14 +295,15 @@ function tone(f1,f2,d){if(!S||!S.tones)return;const c=ctx();if(!c)return;const o
 function say(txt){if(!S||!S.voice||!window.speechSynthesis)return;if(AUD[S.t.id]||INTRO[S.t.id])return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang=L.lang;u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
 function vibe(ms){if(S&&S.vib&&navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
 function stopAll(){stopAudio();if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}S=null;const o=document.getElementById('ov');if(o)o.remove()}
-function ov(html){let o=document.getElementById('ov');if(!o){o=document.createElement('div');o.id='ov';o.className='ov';o.setAttribute('role','dialog');document.body.appendChild(o)}o.innerHTML='<div class="ovin">'+html+'</div>'}
+function ov(html){let o=document.getElementById('ov');if(!o){o=document.createElement('div');o.id='ov';o.className='ov';o.setAttribute('role','dialog');document.body.appendChild(o)}o.innerHTML='<div class="ovin"><p><button class="btn backarrow" onclick="closeOv()" aria-label="'+L.back+'">'+L.back+'</button></p>'+html+'</div>'}
+function closeOv(){if(history.state&&history.state.ov){history.back()}else{stopAll()}}
 function openS(id){stopAll();try{history.pushState({ov:1},'')}catch(e){}const t=TECH.find(x=>x.id===id);S={t,voice:true,tones:false,vib:false,mins:5,b:5};
 const durOpt=t.pace||t.steps&&false?`<p>${L.dur}: ${[3,5,10].map(m=>`<button class="btn dm" data-m="${m}" aria-pressed="${m===5}" onclick="setM(${m},this)">${m} ${L.min}</button>`).join(' ')}</p>`:'';
 ov(`<h2>${esc(t.n)}</h2><div class="warn"><b>${L.safeTitle}</b><br>${esc(L.safeText)}<br>${esc(t.safe)}</div>
 <p>${L.before}</p><input type="range" min="0" max="10" value="5" id="bsl" oninput="S.b=+this.value;document.getElementById('bv').textContent=this.value"> <b id="bv">5</b>
 ${durOpt}
 <p><label><input type="checkbox" checked onchange="S.voice=this.checked"> ${L.voice}</label> <label><input type="checkbox" onchange="S.tones=this.checked"> ${L.tones}</label> <label><input type="checkbox" onchange="S.vib=this.checked"> ${L.vib}</label></p>
-<p class="ref">${L.guidedBy}</p><div class="tools"><button class="btn p" onclick="runS()">▶ ${L.start}</button><button class="btn" onclick="stopAll()">${L.stop}</button></div>`)}
+<p class="ref">${L.guidedBy}</p><div class="tools"><button class="btn p" onclick="runS()">▶ ${L.start}</button><button class="btn" onclick="closeOv()">${L.back}</button></div>`)}
 function setM(m,b){S.mins=m;document.querySelectorAll('.dm').forEach(x=>x.setAttribute('aria-pressed',x===b))}
 function runS_old(){const t=S.t;ctx();try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}
 S.start=Date.now();ov(`<h2>${esc(t.n)}</h2><div class="pacer"><div class="orb" id="orb"></div><div class="lbl big" id="lb"></div><div class="ref" id="sub"></div></div><div class="tools"><button class="btn" id="pz" onclick="pz()">${L.pause}</button><button class="btn" onclick="endS(false)">${L.stop}</button></div>`);
