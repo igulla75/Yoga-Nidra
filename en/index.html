@@ -195,10 +195,76 @@ tense:"tense (5 s)",release:"release (20 s)",guidedBy:"Voice: your device's spee
 safeTitle:"Before you begin",safeText:"Be comfortable. If you feel dizzy, tingly or uneasy, stop and breathe normally.",
 today:"today"};
 const HT={how:"How to do it",sci:"What the research says",lim:"Limits:",safe:"Cautions",src:"Sources:",none:"No results.",noprove:"These techniques are very popular, but the evidence is absent or too weak. This does not mean they are useless or dangerous, but that I cannot tell you they work."};
+
+TECH.push(
+{id:"mind",g:"med",n:"Mindfulness (awareness meditation)",ev:"mod",evt:"Moderate evidence",
+ sum:"You bring attention to the present moment, usually to the breath, noticing thoughts as they arrive without judging them.",
+ how:["Sit comfortably, back straight but not rigid.","Bring attention to the breath, where you feel it most.","When the mind wanders (it always does), notice where it went and return to the breath, without scolding yourself.","Start with 5 minutes."],script:"mind",
+ sci:"A systematic review and meta-analysis of 47 randomized trials with active controls (3,515 participants; Goyal 2014) found moderate-quality evidence of improvement in anxiety (effect 0.38 at 8 weeks), depression (0.30) and pain (0.33), with smaller effects at 3-6 months. For stress and quality of life the evidence is low quality. The same study found no evidence that meditation is better than drugs, exercise or other behavioural therapies. For MBSR programs in healthy adults see also the dedicated card (Khoury 2015).",
+ lim:"Studies are heterogeneous and often unblinded. Effects are small-to-moderate and fade over time. It is not better than other active treatments.",
+ safe:"It can bring up anxiety, sadness or difficult memories (see the card 'When meditation can cause problems'). If that happens, open your eyes, stop, and talk to whoever follows you.",refs:["goyal","khoury","farias"]},
+{id:"vip",g:"med",n:"Vipassana (insight meditation)",ev:"lim",evt:"Limited evidence",
+ sum:"A Buddhist meditation tradition that observes sensations and thoughts as they are, often in silent 10-day retreats. Here you only find a short taste.",
+ how:["Sit comfortably and observe the breath for a few minutes.","Then bring attention to body sensations (weight, warmth, tingling, tension).","Observe them with curiosity: do not change them, notice that they change.","This is only a short introduction, not a retreat."],script:"vip",
+ sci:"A 2025 systematic review of 11 studies (3 randomized, 2 single-arm, 1 pilot and 5 observational; Giridharan 2025) reports reduced stress and anxiety, more mindfulness and well-being, with stronger effects in intensive retreats and among experienced meditators. The authors speak of moderate evidence.",
+ lim:"Small samples, moderate-to-high risk of bias, no blinding. With only 3 randomized studies, the authors' word 'moderate' seems optimistic to me: I consider the evidence limited.",
+ safe:"Intensive retreats can be demanding (see 'When meditation can cause problems'): if you have a history of anxiety disorders, depression or trauma, talk to your clinician first.",refs:["giridharan","farias"]},
+{id:"mantra",g:"med",n:"Mantra meditation (repeating a word)",ev:"lim",evt:"Limited evidence (small-moderate effects, but high bias)",
+ sum:"You silently repeat a word or phrase, returning to it whenever the mind wanders.",
+ how:["Sit comfortably, eyes closed.","Choose a simple word (for example 'calm' or 'peace').","Repeat it silently, gently, in rhythm with the breath.","When you notice you are thinking of something else, return to the word."],script:"mantra",
+ sci:"A systematic review and meta-analysis of 51 randomized trials (Álvarez-Pérez 2022; 27 on Transcendental Meditation, 24 on other mantras) found small-to-moderate effects versus controls: anxiety g -0.46, depression -0.33, stress -0.45, post-traumatic symptoms -0.59. No significant differences from psychotherapy emerged, but data are few.",
+ lim:"None of the 52 papers was judged at low risk of bias. Few studies in psychiatric patients and few long follow-ups. Safety was reported in only 4 studies.",
+ safe:"Generally gentle; if anxiety or discomfort appears, stop.",refs:["alvarez","farias"]},
+{id:"tm",g:"med",n:"Transcendental Meditation (TM)",ev:"lim",evt:"Limited evidence; method taught for a fee",
+ sum:"A mantra technique assigned by a certified teacher, 20 minutes twice a day. It is not taught in this app.",
+ how:["It is learned only from certified teachers, for a fee.","Here you find generic mantra meditation, which is a different thing."],
+ sci:"In the mantra review (Álvarez-Pérez 2022) 27 of 51 studies were on TM. A specific meta-analysis of 16 randomized studies (1,295 people; Orme-Johnson and Barnes, J Altern Complement Med) reports a large effect on trait anxiety: I read it only via a press release, not the original article.",
+ lim:"The meta-analysis authors are linked to the TM world (conflict of interest not verified by me in the original); studies often at high risk of bias.",
+ safe:"As for other meditations: see the card on adverse events.",refs:["alvarez","orme"]},
+{id:"lk",g:"med",n:"Loving-kindness and compassion (metta)",ev:"lim",evt:"Limited-to-moderate evidence (mainly self-compassion)",
+ sum:"You silently repeat phrases wishing well-being, first to yourself, then to a loved one, a neutral person, and all beings.",
+ how:["Sit comfortably and breathe slowly.","Direct phrases to yourself such as: 'May I be safe, may I be well, may I be at peace'.","Then direct them to a loved one, then to everyone.","If the phrases sound false or painful, that is fine: continue gently or stop."],script:"lk",
+ sci:"A meta-analysis of 62 studies (Lv 2024) found that loving-kindness and compassion meditations increase self-compassion (d = 0.56 in randomized studies), with effects maintained at follow-up; smaller in clinical samples; larger with self-focused practices.",
+ lim:"The result mainly concerns self-compassion, not directly anxiety or depression. Some studies were uncontrolled.",
+ safe:"It can bring up strong emotions or sadness. If that happens, stop.",refs:["lv","farias"]},
+{id:"mbct",g:"med",n:"Mindfulness-based cognitive therapy (MBCT)",ev:"mod",evt:"Moderate evidence (for preventing depressive relapse)",
+ sum:"An 8-week group program with a trained teacher, for people who have had several episodes of depression. It is not a practice to do alone.",
+ how:["It is done in a group with a qualified teacher.","A specialist's assessment is needed: talk to whoever treats you."],
+ sci:"An individual patient data analysis of 9 randomized trials (Kuyken 2016, JAMA Psychiatry) found that within 60 weeks 38% of those who did MBCT relapsed versus 49% of those who did not (31% lower risk); compared with continuing antidepressants the risk was 23% lower. It applies to recurrent depression.",
+ lim:"It concerns relapse prevention in people already under care, not general relaxation. I read the university summary, not the full article; I did not verify the DOI.",
+ safe:"It does not replace treatment: it is a complement decided with your specialist.",refs:["kuyken"]},
+{id:"avv",g:"med",n:"When meditation can cause problems",ev:"mod",evt:"Safety information",
+ sum:"Meditation is mostly safe, but not free of unwanted effects: it is worth knowing.",
+ how:["Start with short practices (5-10 minutes).","If strong anxiety, sadness, difficult memories or a feeling of detachment appear, open your eyes, stop and do something concrete (walk, drink, talk to someone).","If it happens more than once, talk to whoever follows you."],
+ sci:"A systematic review of 83 studies on 6,703 adults (Farias 2020) found at least one adverse event in 55 of 83 studies; overall prevalence 8.3% (3.7% in experimental studies, 33.2% in observational ones). Most common: anxiety (33%), depression (27%) and cognitive abnormalities (25%). They can also appear in people with no previous mental health problems.",
+ lim:"The definition of 'adverse event' varies between studies; many studies do not report them. This does not mean meditation is dangerous, but that it should not be presented as always harmless.",
+ safe:"If you are being treated for anxiety or depression, choose practices with whoever follows you.",refs:["farias"]}
+);
+Object.assign(SCRIPTS,{
+mind:[["Sit comfortably, back straight but not rigid. Close your eyes or lower your gaze.",20],["Bring your attention to the breath. You do not need to change it: just observe it as it is.",40],["Feel the air coming in and going out. Where do you feel it most: nostrils, chest, belly?",40],["When a thought arrives, notice that there is a thought, and return to the breath. It is not a mistake: it is the practice.",60],["Keep going. Each time you notice you have wandered, that is a small moment of awareness.",60],["Widen your attention to the sounds around you, without judging them.",40],["Return to the breath for a moment.",30],["When you are ready, gently move your fingers and open your eyes. End of practice.",10]],
+vip:[["Sit comfortably and close your eyes. Observe the breath for a few moments.",30],["Now bring attention to the body sitting: the contact with the chair, the weight, the temperature.",40],["Choose one sensation: a tingling, a pressure, a warmth. Observe it with curiosity.",50],["Notice whether it changes: does it intensify, move, fade? You do not need to make it change.",50],["If a thought or emotion arrives, notice that it is there, and return to the body sensations.",60],["Widen attention to the whole body, as if observing from a distance.",50],["Return to the breath. When you wish, open your eyes. End of practice.",10]],
+mantra:[["Sit comfortably. Close your eyes. Take two slow breaths.",20],["Choose a simple word, such as 'calm' or 'peace'. Let us begin.",15],["Repeat the word silently, gently, without hurry.",60],["If the mind wanders, and it will, return to the word kindly.",60],["Let the word become lighter and lighter.",60],["Continue in silence.",60],["Stop repeating. Rest a moment in silence, then open your eyes. End of practice.",15]],
+lk:[["Sit comfortably and breathe slowly. Place a hand on your heart, if that feels good.",25],["Silently offer yourself these phrases: 'May I be safe. May I be well. May I be at peace.'",45],["Repeat them calmly, feeling their meaning.",40],["Now think of someone who cares for you. Offer them: 'May you be safe. May you be well. May you be at peace.'",50],["Think of someone you barely know. The same wishes.",40],["Widen to all beings: 'May all be safe. May all be well. May all be at peace.'",50],["Return to yourself and the breath. When you wish, open your eyes. End of practice.",15]]});
+Object.assign(REFS,{
+goyal:"Goyal et al. Meditation programs for psychological stress and well-being: a systematic review and meta-analysis. JAMA Intern Med 2014. doi:10.1001/jamainternmed.2013.13018 (abstract read; author list, volume and pages to be verified).",
+giridharan:"Giridharan S, Soumian S, Kumar NV, Godbole M. The impact of Vipassana meditation on health and well-being: a systematic review of current evidence. Cureus 2025;17(9):e93355. doi:10.7759/cureus.93355",
+alvarez:"Álvarez-Pérez Y, Rivero-Santana A, Perestelo-Pérez L, et al. Effectiveness of mantra-based meditation on mental health: a systematic review and meta-analysis. Int J Environ Res Public Health 2022;19(6):3380. doi:10.3390/ijerph19063380",
+orme:"Orme-Johnson DW, Barnes VA. Effects of the Transcendental Meditation technique on trait anxiety: a meta-analysis of randomized controlled trials. J Altern Complement Med (year and volume to be verified; read only via a press release).",
+lv:"Lv J, Jiang Y, Li R, et al. Effects of loving-kindness and compassion meditations on self-compassion: a systematic review and meta-analysis. Clin Psychol Sci Pract 2024;31(1):19-35. doi:10.1037/cps0000177",
+kuyken:"Kuyken W, et al. Efficacy of mindfulness-based cognitive therapy in prevention of depressive relapse: an individual patient data meta-analysis from randomized trials. JAMA Psychiatry 2016 (read via a university summary: DOI and pages to be verified).",
+farias:"Farias M, Maraldi E, Wallenkampf KC, Lucchetti G. Adverse events in meditation practices and meditation-based therapies: a systematic review. Acta Psychiatr Scand 2020;142(5):374-393. doi:10.1111/acps.13225"});
+L.tabs={prac:"Practice",all:"Cards",resp:"Breathing",pran:"Pranayama",med:"Meditation",ril:"Relaxation",no:"Not enough evidence",bib:"References",hist:"My diary"};
+
+const CUES={};
+L.audioDir='audio/en/';L.tenseRe=/tense/i;L.relRe=/release/i;L.noAudio=true;
+
+L.home='← Back to start';
 </script><script>
 let cur="prac";const tabs=document.getElementById('tabs'),list=document.getElementById('list'),q=document.getElementById('q');
 const G=L.tabs;
-for(const k in G){const b=document.createElement('button');b.textContent=G[k];b.setAttribute('aria-pressed',k===cur);b.onclick=()=>{cur=k;[...tabs.children].forEach(x=>x.setAttribute('aria-pressed',x===b));render()};tabs.appendChild(b)}
+for(const k in G){const b=document.createElement('button');b.textContent=G[k];b.dataset.k=k;b.setAttribute('aria-pressed',k===cur);b.onclick=()=>setTab(k);tabs.appendChild(b)}
+function setTab(k,push=true){cur=k;[...tabs.children].forEach(x=>x.setAttribute('aria-pressed',x.dataset.k===k));if(push){try{history.pushState({k:k},'')}catch(e){}}render();window.scrollTo(0,0)}
+window.addEventListener('popstate',ev=>{const st=ev.state;if(st&&st.ov){if(document.getElementById('ov'))stopAll();return}if(document.getElementById('ov'))stopAll();setTab((st&&st.k)||'prac',false)});
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const canPractice=t=>t.pace||t.steps||t.script;
 function card(t){return `<div class="card" id="${t.id}"><span class="tag ${t.ev}">${esc(t.evt)}</span><h2>${esc(t.n)}</h2><p>${esc(t.sum)}</p>
@@ -207,27 +273,28 @@ ${canPractice(t)?`<button class="btn p" onclick="openS('${t.id}')">▶ ${L.tabs.
 <details><summary>${HT.sci}</summary><p>${esc(t.sci)}</p><p><b>${HT.lim}</b> ${esc(t.lim)}</p></details>
 <details><summary>${HT.safe}</summary><p>${esc(t.safe)}</p></details>
 ${t.refs.length?`<p class="ref">${HT.src} ${t.refs.map(r=>`<a href="#bib" onclick="goBib()">${r}</a>`).join(', ')}</p>`:''}</div>`}
-function goBib(){cur='bib';[...tabs.children].forEach((x,i)=>x.setAttribute('aria-pressed',Object.keys(G)[i]==='bib'));render()}
+function goBib(){setTab('bib')}
 function hist(){try{return JSON.parse(localStorage.getItem('rr_hist')||'[]')}catch(e){return[]}}
 function saveH(h){try{localStorage.setItem('rr_hist',JSON.stringify(h))}catch(e){}}
+function backBar(){return cur==='prac'?'':`<p><button class="btn" onclick="setTab('prac')">${L.home}</button></p>`}
 function render(){stopAll();list.innerHTML='';q.style.display=(cur==='all'||cur==='resp'||cur==='pran'||cur==='ril')?'':'none';const s=q.value.toLowerCase();
 if(cur==='prac'){list.innerHTML=`<p>${L.pracIntro}</p>`+TECH.filter(canPractice).map(t=>`<div class="card"><span class="tag ${t.ev}">${esc(t.evt)}</span><h2>${esc(t.n)}</h2><p>${esc(t.sum)}</p><button class="btn p" onclick="openS('${t.id}')">▶ ${L.start}</button></div>`).join('');return}
-if(cur==='hist'){const h=hist();if(!h.length){list.innerHTML=`<p>${L.histEmpty}</p>`;return}
+if(cur==='hist'){const h=hist();if(!h.length){list.innerHTML=backBar()+`<p>${L.histEmpty}</p>`;return}
 const d=h.map(x=>x.a-x.b),avg=(d.reduce((a,b)=>a+b,0)/d.length).toFixed(1);
-list.innerHTML=`<div class="card"><b>${L.avg} (${L.calma}):</b> ${avg>0?'+':''}${avg} / ${h.length}</div>`+h.slice().reverse().slice(0,30).map(x=>`<div class="card"><b>${esc(x.n)}</b><br>${esc(x.d)} · ${x.m} ${L.min.slice(0,3)}<br>${L.calma}: ${x.b} → ${x.a}</div>`).join('')+`<p class="ref">${L.histNote}</p><button class="btn" onclick="if(confirm('?')){saveH([]);render()}">${L.clear}</button>`;return}
-if(cur==='no'){list.innerHTML=`<div class="warn">${HT.noprove}</div>`+NOPROVE.map(n=>`<div class="card"><h2>${esc(n.n)}</h2><p>${esc(n.t)}</p></div>`).join('');return}
-if(cur==='bib'){list.innerHTML=`<div class="card" id="bib"><h2>${L.tabs.bib}</h2>`+Object.entries(REFS).map(([k,v])=>`<p class="ref"><b>${k}</b>: ${esc(v)}</p>`).join('')+'</div>';return}
-list.innerHTML=TECH.filter(t=>(cur==='all'||t.g===cur)&&(!s||(t.n+t.sum).toLowerCase().includes(s))).map(card).join('')||`<p>${HT.none}</p>`}
+list.innerHTML=backBar()+`<div class="card"><b>${L.avg} (${L.calma}):</b> ${avg>0?'+':''}${avg} / ${h.length}</div>`+h.slice().reverse().slice(0,30).map(x=>`<div class="card"><b>${esc(x.n)}</b><br>${esc(x.d)} · ${x.m} ${L.min.slice(0,3)}<br>${L.calma}: ${x.b} → ${x.a}</div>`).join('')+`<p class="ref">${L.histNote}</p><button class="btn" onclick="if(confirm('?')){saveH([]);render()}">${L.clear}</button>`;return}
+if(cur==='no'){list.innerHTML=backBar()+`<div class="warn">${HT.noprove}</div>`+NOPROVE.map(n=>`<div class="card"><h2>${esc(n.n)}</h2><p>${esc(n.t)}</p></div>`).join('');return}
+if(cur==='bib'){list.innerHTML=backBar()+`<div class="card" id="bib"><h2>${L.tabs.bib}</h2>`+Object.entries(REFS).map(([k,v])=>`<p class="ref"><b>${k}</b>: ${esc(v)}</p>`).join('')+'</div>';return}
+list.innerHTML=backBar()+TECH.filter(t=>(cur==='all'||t.g===cur)&&(!s||(t.n+t.sum).toLowerCase().includes(s))).map(card).join('')||`<p>${HT.none}</p>`}
 q.oninput=render;
 // ---------- sessione ----------
 let S=null,tm=null,ac=null,paused=false,sessionTimers=[];
 function ctx(){try{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac}catch(e){return null}}
 function tone(f1,f2,d){if(!S||!S.tones)return;const c=ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';const t=c.currentTime;o.frequency.setValueAtTime(f1,t);o.frequency.linearRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06,t+Math.min(.6,d/3));g.gain.linearRampToValueAtTime(0,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+.05)}
-function say(txt){if(!S||!S.voice||!window.speechSynthesis)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang=L.lang;u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function say(txt){if(!S||!S.voice||!window.speechSynthesis)return;if(AUD[S.t.id]||INTRO[S.t.id])return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang=L.lang;u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
 function vibe(ms){if(S&&S.vib&&navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
-function stopAll(){if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}S=null;const o=document.getElementById('ov');if(o)o.remove()}
+function stopAll(){stopAudio();if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}S=null;const o=document.getElementById('ov');if(o)o.remove()}
 function ov(html){let o=document.getElementById('ov');if(!o){o=document.createElement('div');o.id='ov';o.className='ov';o.setAttribute('role','dialog');document.body.appendChild(o)}o.innerHTML='<div class="ovin">'+html+'</div>'}
-function openS(id){stopAll();const t=TECH.find(x=>x.id===id);S={t,voice:true,tones:false,vib:false,mins:5,b:5};
+function openS(id){stopAll();try{history.pushState({ov:1},'')}catch(e){}const t=TECH.find(x=>x.id===id);S={t,voice:true,tones:false,vib:false,mins:5,b:5};
 const durOpt=t.pace||t.steps&&false?`<p>${L.dur}: ${[3,5,10].map(m=>`<button class="btn dm" data-m="${m}" aria-pressed="${m===5}" onclick="setM(${m},this)">${m} ${L.min}</button>`).join(' ')}</p>`:'';
 ov(`<h2>${esc(t.n)}</h2><div class="warn"><b>${L.safeTitle}</b><br>${esc(L.safeText)}<br>${esc(t.safe)}</div>
 <p>${L.before}</p><input type="range" min="0" max="10" value="5" id="bsl" oninput="S.b=+this.value;document.getElementById('bv').textContent=this.value"> <b id="bv">5</b>
@@ -235,7 +302,7 @@ ${durOpt}
 <p><label><input type="checkbox" checked onchange="S.voice=this.checked"> ${L.voice}</label> <label><input type="checkbox" onchange="S.tones=this.checked"> ${L.tones}</label> <label><input type="checkbox" onchange="S.vib=this.checked"> ${L.vib}</label></p>
 <p class="ref">${L.guidedBy}</p><div class="tools"><button class="btn p" onclick="runS()">▶ ${L.start}</button><button class="btn" onclick="stopAll()">${L.stop}</button></div>`)}
 function setM(m,b){S.mins=m;document.querySelectorAll('.dm').forEach(x=>x.setAttribute('aria-pressed',x===b))}
-function runS(){const t=S.t;ctx();try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}
+function runS_old(){const t=S.t;ctx();try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}
 S.start=Date.now();ov(`<h2>${esc(t.n)}</h2><div class="pacer"><div class="orb" id="orb"></div><div class="lbl big" id="lb"></div><div class="ref" id="sub"></div></div><div class="tools"><button class="btn" id="pz" onclick="pz()">${L.pause}</button><button class="btn" onclick="endS(false)">${L.stop}</button></div>`);
 const orb=document.getElementById('orb'),lb=document.getElementById('lb'),sub=document.getElementById('sub');
 if(t.pace){const end=Date.now()+S.mins*60000;let i=0,cycle=0;S.mode='pace';
@@ -251,11 +318,31 @@ S.mode='seq';let i=0;
 if(i>=seq.length){endS(true);return}
 const [txt,d,k]=seq[i];lb.textContent=txt;sub.textContent=(i+1)+' / '+seq.length;orb.style.transition=`transform ${d}s ease-in-out`;orb.style.transform=k==='t'?'scale(1.5)':'scale(1.2)';if(k==='r')orb.style.transform='scale(1)';
 say(txt);tone(k==='t'?260:200,k==='t'?300:200,2);vibe(k==='t'?60:0);i++;tm=setTimeout(step,d*1000)})()}}
-function pz(){paused=!paused;document.getElementById('pz').textContent=paused?L.resume:L.pause;if(window.speechSynthesis)try{paused?speechSynthesis.pause():speechSynthesis.resume()}catch(e){}}
-function endS(ok){if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}paused=false;
+function endS_old(ok){if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}paused=false;
 if(!S)return;const t=S.t;S.a=5;
 ov(`<h2>${ok?L.done:L.stopMsg}</h2><p>${L.after}</p><input type="range" min="0" max="10" value="5" oninput="S.a=+this.value;document.getElementById('av').textContent=this.value"> <b id="av">5</b>
 <div class="tools"><button class="btn p" onclick="saveS()">${L.save}</button><button class="btn" onclick="stopAll()">✕</button></div>`)}
-function saveS(){const h=hist();h.push({n:S.t.n,d:new Date().toLocaleDateString(L.lang),m:S.mode==='pace'?S.mins:Math.max(1,Math.round((Date.now()-S.start)/60000)),b:S.b,a:S.a});saveH(h);stopAll();cur='hist';[...tabs.children].forEach((x,i)=>x.setAttribute('aria-pressed',Object.keys(G)[i]==='hist'));render()}
+function saveS(){const h=hist();h.push({n:S.t.n,d:new Date().toLocaleDateString(L.lang),m:S.mode==='pace'?S.mins:Math.max(1,Math.round((Date.now()-S.start)/60000)),b:S.b,a:S.a});saveH(h);stopAll();setTab('hist')}
+
+const AUD=L.noAudio?{}:{pmr:'pratica_pmr',bscript:'pratica_scan',iscript:'pratica_imm',mind:'pratica_mind',vip:'pratica_vip',mantra:'pratica_mantra',lk:'pratica_lk'};
+const INTRO=L.noAudio?{}:{lenta:'intro_lenta',sigh:'intro_sigh',box:'intro_box',pursed:'intro_pursed',nadi:'intro_nadi',ujj:'intro_ujj',bhram:'intro_bhram'};
+let AU=null,AUi=null;
+function stopAudio(){if(AUi){clearInterval(AUi);AUi=null}if(AU){try{AU.onended=null;AU.onerror=null;AU.pause()}catch(e){}AU=null}}
+function cap(name,t){const lb=document.getElementById('lb'),sub=document.getElementById('sub'),orb=document.getElementById('orb');if(!lb||!AU)return;const cu=CUES[name]||[];let cur=null;for(const c of cu){if(c[0]<=t)cur=c;else break}
+if(cur&&lb.dataset.k!==String(cur[0])){lb.dataset.k=cur[0];lb.textContent=cur[1];if(orb){const tx=cur[1];orb.style.transition='transform 4s ease-in-out';orb.style.transform=L.tenseRe.test(tx)?'scale(1.5)':L.relRe.test(tx)?'scale(1)':'scale(1.15)'}}
+const d=AU.duration||0;sub.textContent=d?Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')+' / '+Math.floor(d/60)+':'+String(Math.floor(d%60)).padStart(2,'0'):''}
+function playClip(name,onEnd,onFail){stopAudio();let done=false;const fin=f=>{if(done)return;done=true;stopAudio();f&&f()};
+try{AU=new Audio(L.audioDir+name+'.mp3');AU.preload='auto';AU.onended=()=>fin(onEnd);AU.onerror=()=>fin(onFail||onEnd);
+const p=AU.play();if(p&&p.catch)p.catch(()=>fin(onFail||onEnd));AUi=setInterval(()=>{if(AU&&!paused)cap(name,AU.currentTime)},250)}catch(e){fin(onFail||onEnd)}}
+function runAudioPractice(){const t=S.t;ov(`<h2>${esc(t.n)}</h2><div class="pacer"><div class="orb" id="orb"></div><div class="lbl big" id="lb"></div><div class="ref" id="sub"></div></div><div class="tools"><button class="btn" id="pz" onclick="pz()">${L.pause}</button><button class="btn" onclick="endS(false)">${L.stop}</button></div>`);
+S.mode='audio';playClip(AUD[t.id],()=>endS_old(true),()=>{S.voice=false;runS_old()})}
+function runS(){const t=S.t;ctx();try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}S.start=Date.now();
+if(S.voice&&AUD[t.id])return runAudioPractice();
+if(S.voice&&INTRO[t.id]){ov(`<h2>${esc(t.n)}</h2><div class="pacer"><div class="orb" id="orb"></div><div class="lbl big" id="lb"></div><div class="ref" id="sub"></div></div><div class="tools"><button class="btn" id="pz" onclick="pz()">${L.pause}</button><button class="btn" onclick="endS(false)">${L.stop}</button></div>`);
+playClip(INTRO[t.id],()=>runS_old(),()=>runS_old());return}
+runS_old()}
+function endS(ok){if(ok&&S&&S.voice&&INTRO[S.t.id]&&!S.closed){S.closed=true;const lb=document.getElementById('lb');if(lb){delete lb.dataset.k}stopAudio();playClip('chiusura_respirazione',()=>endS_old(true),()=>endS_old(true));return}
+stopAudio();endS_old(ok)}
+function pz(){paused=!paused;document.getElementById('pz').textContent=paused?L.resume:L.pause;if(AU){try{paused?AU.pause():AU.play()}catch(e){}}if(window.speechSynthesis)try{paused?speechSynthesis.pause():speechSynthesis.resume()}catch(e){}}
 render();
 </script></body></html>
