@@ -475,7 +475,7 @@ q.oninput=render;
 // ---------- sessione ----------
 let S=null,tm=null,ac=null,paused=false,sessionTimers=[];
 function ctx(){try{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac}catch(e){return null}}
-function tone(f1,f2,d){if(!S||!S.tones)return;const c=ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';const t=c.currentTime;o.frequency.setValueAtTime(f1,t);o.frequency.linearRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06,t+Math.min(.6,d/3));g.gain.linearRampToValueAtTime(0,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+.05)}
+function tone(f1,f2,d){if(!S||!S.tones)return;const c=ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';const t=c.currentTime;o.frequency.setValueAtTime(f1,t);o.frequency.linearRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.16,t+Math.min(.6,d/3));g.gain.linearRampToValueAtTime(0,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+.05)}
 function say(txt){if(!S||!S.voice||!window.speechSynthesis)return;if(!S.noAudio&&(AUD[S.t.id]||INTRO[S.t.id]))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang=L.lang;u.rate=.85;speechSynthesis.speak(u);speechSynthesis.resume()}catch(e){}}
 function vibe(ms){if(S&&S.vib&&navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
 function stopAll(){paused=false;stopAudio();if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}S=null;const o=document.getElementById('ov');if(o)o.remove()}
@@ -486,7 +486,7 @@ const durOpt=t.pace||t.steps&&false?`<p>${L.dur}: ${[3,5,10].map(m=>`<button cla
 ov(`<h2>${esc(t.n)}</h2><div class="warn"><b>${L.safeTitle}</b><br>${esc(L.safeText)}<br>${esc(t.safe)}</div>
 <p>${L.before}</p><input type="range" min="0" max="10" value="5" id="bsl" oninput="S.b=+this.value;document.getElementById('bv').textContent=this.value"> <b id="bv">5</b>
 ${durOpt}
-<p><label><input type="checkbox" checked onchange="S.voice=this.checked"> ${L.voice}</label> <label><input type="checkbox" onchange="S.tones=this.checked"> ${L.tones}</label> <label><input type="checkbox" onchange="S.vib=this.checked"> ${L.vib}</label></p>
+<p><label><input type="checkbox" checked onchange="S.voice=this.checked"> ${L.voice}</label> ${t.pace?`<label><input type="checkbox" onchange="S.tones=this.checked"> ${L.tones}</label> <label><input type="checkbox" onchange="S.vib=this.checked"> ${L.vib}</label>`:''}</p>
 <p class="ref">${L.guidedBy}</p><div class="tools"><button class="btn p" onclick="runS()">▶ ${L.start}</button><button class="btn" onclick="closeOv()">${L.back}</button></div>`)}
 function setM(m,b){S.mins=m;document.querySelectorAll('.dm').forEach(x=>x.setAttribute('aria-pressed',x===b))}
 function runS_old(){const t=S.t;ctx();try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}
