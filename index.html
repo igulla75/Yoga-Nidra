@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#2f6f73"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <title>Respiro e rilassamento: che cosa dice la scienza</title>
 <style>
 :root{--bg:#f6f3ee;--fg:#1f2a2e;--mut:#5a676b;--card:#fff;--line:#d9d4ca;--ac:#2f6f73;--acb:#e3f0ef;--mod:#2f7d4f;--lim:#a8741a;--deb:#a24b3b;--warn:#fff4dc}
@@ -453,6 +453,15 @@ wieland:"Wieland LS e colleghi. Yoga treatment for chronic non-specific low back
 ashar:"Ashar YK, Gordon A, Schubiner H, e colleghi. Effect of Pain Reprocessing Therapy vs Placebo and Usual Care for Patients With Chronic Back Pain: A Randomized Clinical Trial. JAMA Psychiatry 2022 (151 persone).",
 lumley:"Lumley MA, Schubiner H, Lockhart NA, e colleghi. Emotional awareness and expression therapy, cognitive behavioral therapy, and education for fibromyalgia: a cluster-randomized controlled trial. Pain 2017 (titolo e dati letti da una sintesi, non dall'articolo)."
 });
+
+;Object.assign(L,{swPath:'sw.js',swScope:'./',offTitle:"Installa e usa senza internet",offText:"Puoi mettere l'app sulla schermata del telefono, come le altre, e usarla anche senza connessione. Per sentire le voci offline devi scaricarle una volta (circa 72 MB: meglio con il Wi-Fi).",offInstall:"Installa l'app",offDl:"Scarica le voci per usare senza internet",offInstalled:"L'app è installata su questo dispositivo.",offHow:"Per installarla: su iPhone/iPad apri questa pagina in Safari, tocca il tasto Condividi e scegli «Aggiungi alla schermata Home». Su Android usa il menu del browser e scegli «Installa app» o «Aggiungi a schermata Home».",offProg:"Scaricate:",offDone:"Fatto: ora le voci funzionano anche senza internet.",offPart:"Alcune voci non sono state scaricate ({n}). Controlla la connessione e riprova."});
+
+;Object.assign(L,{moreTitle:"Vuoi altre pratiche?",moreText:"Questa app non può contenere tutto. Ecco alcuni siti con molte pratiche gratuite, anche in altre lingue. Si aprono in una nuova scheda e servono la connessione.",
+moreList:[["Palouse Mindfulness","https://palousemindfulness.com","Corso MBSR di 8 settimane, gratuito e da fare da soli, con pratiche guidate da ascoltare o scaricare. Il sito ha una versione in italiano; non ho verificato se anche le voci delle pratiche sono in italiano."],
+["Insight Timer","https://insighttimer.com","Una libreria molto grande, con una parte gratuita ampia e contenuti in oltre 50 lingue (secondo la loro pagina di assistenza). Ha anche una parte a pagamento: guarda tu cosa è gratuito. La lingua dei contenuti si sceglie nelle impostazioni."],
+["UCLA Mindful","https://www.uclahealth.org/programs/marc/free-guided-meditations","Meditazioni guidate gratuite dell'Università della California a Los Angeles, anche in più lingue; non ho verificato quali."],
+["Free Mindfulness Project","https://www.freemindfulness.org","Esercizi di mindfulness gratuiti da scaricare. Non ho verificato le lingue."]],
+moreNote:"Questi siti non sono stati controllati da noi: le loro pratiche non hanno il livello di prova che indichiamo nelle schede. Valgono le stesse avvertenze: se stai molto male o hai disturbi per cui sei in cura, scegli le pratiche con chi ti segue, e per il dolore usa prima la sezione Dolore."});
 </script><script>
 let cur="prac";const tabs=document.getElementById('tabs'),list=document.getElementById('list'),q=document.getElementById('q');
 const G=L.tabs;
@@ -484,7 +493,7 @@ return `<div class="card"><h2>${U.week} ${p.w}: ${esc(p.t)}</h2><p>${esc(p.goal)
 <p>${U.pain}: <input type="range" min="0" max="10" value="${s.p??0}" oninput="percSet(${p.w},'p',+this.value)"> <b id="pv_p_${p.w}">${s.p??0}</b></p>
 <p>${U.mood}: <input type="range" min="0" max="10" value="${s.m??0}" oninput="percSet(${p.w},'m',+this.value)"> <b id="pv_m_${p.w}">${s.m??0}</b></p></div>`}).join('')+`<p class="ref">${U.note}</p>`}
 function render(){stopAll();list.innerHTML='';q.style.display=(cur==='all'||cur==='resp'||cur==='pran'||cur==='ril'||cur==='dol')?'':'none';const s=q.value.toLowerCase();
-if(cur==='prac'){list.innerHTML=`<p>${L.pracIntro}</p>`+TECH.filter(canPractice).map(t=>`<div class="card"><span class="tag ${t.ev}">${esc(t.evt)}</span><h2>${esc(t.n)}</h2><p>${esc(t.sum)}</p><button class="btn p" onclick="openS('${t.id}')">▶ ${L.start}</button></div>`).join('');return}
+if(cur==='prac'){list.innerHTML=`<p>${L.pracIntro}</p>`+TECH.filter(canPractice).map(t=>`<div class="card"><span class="tag ${t.ev}">${esc(t.evt)}</span><h2>${esc(t.n)}</h2><p>${esc(t.sum)}</p><button class="btn p" onclick="openS('${t.id}')">▶ ${L.start}</button></div>`).join('')+moreCard()+offCard();offInit();return}
 if(cur==='perc'){percRender();return}
 if(cur==='hist'){const h=hist();const how=`<div class="card"><b>${L.histTitle}</b><p>${L.histHow}</p></div>`;if(!h.length){list.innerHTML=backBar()+how+`<p>${L.histEmpty}</p>`;return}
 const d=h.map(x=>x.a-x.b),avg=(d.reduce((a,b)=>a+b,0)/d.length).toFixed(1);
@@ -557,4 +566,16 @@ function endS(ok){if(ok&&S&&S.voice&&INTRO[S.t.id]&&!S.closed){S.closed=true;con
 stopAudio();endS_old(ok)}
 function pz(){paused=!paused;document.getElementById('pz').textContent=paused?L.resume:L.pause;if(AU){try{paused?AU.pause():AU.play()}catch(e){}}if(window.speechSynthesis)try{paused?speechSynthesis.pause():speechSynthesis.resume()}catch(e){}}
 render();
+
+var offDeferred=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();offDeferred=e;if(typeof offInit==='function'&&cur==='prac')offInit()});
+function offSecure(){return /^https?:$/.test(location.protocol)&&'serviceWorker' in navigator&&!!window.caches}
+function offStandalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}}
+function offCard(){if(!offSecure())return '';return `<div class="card"><h2>${L.offTitle}</h2><p>${L.offText}</p><p class="ref" id="offmsg"></p><div class="tools"><button class="btn" id="offinst" style="display:none">${L.offInstall}</button><button class="btn" id="offdl">${L.offDl}</button></div></div>`}
+function offInit(){if(!offSecure())return;const bi=document.getElementById('offinst'),bd=document.getElementById('offdl'),msg=document.getElementById('offmsg');if(!bd)return;
+if(offStandalone()){msg.textContent=L.offInstalled}else if(offDeferred){bi.style.display='';bi.onclick=()=>{offDeferred.prompt();offDeferred.userChoice.finally(()=>{offDeferred=null;bi.style.display='none'})}}else{msg.textContent=L.offHow}
+bd.onclick=async()=>{bd.disabled=true;const names=(L.have||[]).filter(n=>!/^intro_|^chiusura_/.test(n)||true);let ok=0,done=0;try{const c=await caches.open('rr-v1');for(const n of names){const u=new URL(L.audioDir+n+'.mp3',location.href).href;try{if(!(await c.match(u))){const r=await fetch(u);if(!r.ok)throw 0;await c.put(u,r)}ok++}catch(e){}done++;msg.textContent=L.offProg+' '+done+' / '+names.length}}catch(e){}
+msg.textContent=ok===names.length?L.offDone:L.offPart.replace('{n}',names.length-ok);bd.disabled=false}}
+if(offSecure()){try{navigator.serviceWorker.register(L.swPath,{scope:L.swScope}).catch(()=>{})}catch(e){}}
+
+function moreCard(){if(!L.moreList)return '';return `<div class="card"><h2>${L.moreTitle}</h2><p>${L.moreText}</p>`+L.moreList.map(x=>`<p><a href="${x[1]}" target="_blank" rel="noopener"><b>${esc(x[0])}</b></a><br>${esc(x[2])}</p>`).join('')+`<p class="ref">${L.moreNote}</p></div>`}
 </script></body></html>
