@@ -344,7 +344,7 @@ q.oninput=render;
 let S=null,tm=null,ac=null,paused=false,sessionTimers=[];
 function ctx(){try{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac}catch(e){return null}}
 function tone(f1,f2,d){if(!S||!S.tones)return;const c=ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='sine';const t=c.currentTime;o.frequency.setValueAtTime(f1,t);o.frequency.linearRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06,t+Math.min(.6,d/3));g.gain.linearRampToValueAtTime(0,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+.05)}
-function say(txt){if(!S||!S.voice||!window.speechSynthesis)return;if(!S.noAudio&&(AUD[S.t.id]||INTRO[S.t.id]))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang=L.lang;u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function say(txt){if(!S||!S.voice||!window.speechSynthesis)return;if(!S.noAudio&&(AUD[S.t.id]||INTRO[S.t.id]))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang=L.lang;u.rate=.85;speechSynthesis.speak(u);speechSynthesis.resume()}catch(e){}}
 function vibe(ms){if(S&&S.vib&&navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
 function stopAll(){stopAudio();if(tm){clearTimeout(tm);tm=null}if(window.speechSynthesis)try{speechSynthesis.cancel()}catch(e){}S=null;const o=document.getElementById('ov');if(o)o.remove()}
 function ov(html){let o=document.getElementById('ov');if(!o){o=document.createElement('div');o.id='ov';o.className='ov';o.setAttribute('role','dialog');document.body.appendChild(o)}o.innerHTML='<div class="ovin"><p><button class="btn backarrow" onclick="closeOv()" aria-label="'+L.back+'">'+L.back+'</button></p>'+html+'</div>'}
@@ -389,7 +389,7 @@ if(cur&&lb.dataset.k!==String(cur[0])){lb.dataset.k=cur[0];lb.textContent=cur[1]
 const d=AU.duration||0;sub.textContent=d?Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')+' / '+Math.floor(d/60)+':'+String(Math.floor(d%60)).padStart(2,'0'):''}
 function playClip(name,onEnd,onFail){stopAudio();let done=false;const fin=f=>{if(done)return;done=true;stopAudio();f&&f()};
 try{AU=new Audio(L.audioDir+name+'.mp3');AU.preload='auto';AU.onended=()=>fin(onEnd);AU.onerror=()=>fin(onFail||onEnd);
-const p=AU.play();if(p&&p.catch)p.catch(()=>fin(onFail||onEnd));AUi=setInterval(()=>{if(AU&&!paused)cap(name,AU.currentTime)},250)}catch(e){fin(onFail||onEnd)}}
+const p=AU.play();if(p&&p.catch)p.catch(()=>fin(onFail||onEnd));const A0=AU;[1200,3000].forEach(ms=>setTimeout(()=>{if(AU===A0&&!paused&&A0.paused===true&&!done){try{const q=A0.play();if(q&&q.catch)q.catch(()=>{})}catch(e){}}},ms));AUi=setInterval(()=>{if(AU&&!paused)cap(name,AU.currentTime)},250)}catch(e){fin(onFail||onEnd)}}
 function runAudioPractice(){const t=S.t;ov(`<h2>${esc(t.n)}</h2><div class="pacer"><div class="orb" id="orb"></div><div class="lbl big" id="lb"></div><div class="ref" id="sub"></div></div><div class="tools"><button class="btn" id="pz" onclick="pz()">${L.pause}</button><button class="btn" onclick="endS(false)">${L.stop}</button></div>`);
 S.mode='audio';playClip(AUD[t.id],()=>endS_old(true),()=>{S.noAudio=true;runS_old()})}
 function runS(){const t=S.t;ctx();try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}S.start=Date.now();
